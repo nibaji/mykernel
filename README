@@ -1,0 +1,24 @@
+    mykernel
+ 
+What is mykernel script?
+    Script to create recovery flashable arm64 kernel zips.
+
+Steps in order
+1)  Creates kernel_srcs, toolchains, out, zip folders.
+2)  Gets kernel git link.
+3)  Gets kernel git branch/tag
+4)  Clones kernel to kernel_srcs/<kernel folder name determined by git>
+5)  Gets defconfig by listing the filenames of kernel_srcs/<kernel folder name determined by git>/arch/arm64/configs
+        <kernel folder name determined by git> folder name is read by running recently created folder command.
+6)  Choose among following toolchains
+                *AOSP-GCC (4.9)
+                *ARM-GNU-GCC (8.2)
+                *Bootlin (Stable - gcc 6.4.0 & Bleeding Edge - gcc 8.2.0)
+                *Linaro (7.3.1)
+7)  Clones/downloads/extracts toolchain depending on the availability of tarball/toolchain_folder in the working folder.
+8)  Clears out dirctory.
+9)  Compiles the kernel.
+10) Clears zip directory.
+11) Clones anykernel2  from https://github.com/osm0sis/AnyKernel2 by @osm0sis
+12) Appends 'mykernel' to kernel string, alters device/ramdisk specific lines in anykernel.sh
+13) Creates recovery flashable arm64 kernel zip.
