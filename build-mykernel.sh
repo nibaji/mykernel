@@ -342,6 +342,7 @@ elif [ $tc_opt -eq 3 ] #bootlin
                 tar xf aarch64--glibc--stable-2018.02-2.tar.bz2
                 toolchain_dir="$toolchains/aarch64--glibc--stable-2018.02-2"
                 cc="$toolchain_dir/bin/aarch64-buildroot-linux-gnu-"
+            fi
         else
             echo -e "$r What do you mean? $o"
             exit
