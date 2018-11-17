@@ -456,7 +456,7 @@ built_time=$(date +'%Y%m%d-%H%M')
 #zip it with AnyKernel2                      
 if [ -f  "$out_dir/arch/arm64/boot/Image.gz-dtb" ]
     then
-    echo -e "$g zipping.. $o"
+    echo -e "$g Fetching anykernel2 $o"
     rm -rf $zip_dir
     git clone https://github.com/osm0sis/AnyKernel2 $zip_dir
     cd $zip_dir
@@ -471,6 +471,7 @@ if [ -f  "$out_dir/arch/arm64/boot/Image.gz-dtb" ]
     sed -i '/# begin ramdisk changes/{/write_boot/!d;}' anykernel.sh
     sed -i '/init/{/write_boot/!d;}' anykernel.sh
     sed -i '/fstab/{/write_boot/!d;}' anykernel.sh
+    echo -e "$g zipping.. $o"
     zip -r9 mykernel-$tc-$device_name--$built_time *
     echo -e "$g mykernel is ready to be flashed. $o"
 else
