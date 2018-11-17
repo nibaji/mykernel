@@ -459,7 +459,7 @@ if [ -f  "$out_dir/arch/arm64/boot/Image.gz-dtb" ]
     echo -e "$g zipping.. $o"
     rm -rf $zip_dir
     git clone https://github.com/osm0sis/AnyKernel2 $zip_dir
-    cd $zip
+    cd $zip_dir
     rm -rf modules patch ramdisk *.md
     cp  $out_dir/arch/arm64/boot/Image.gz-dtb $zip_dir
     mv Image.gz-dtb zImage
