@@ -42,16 +42,36 @@ fi
 echo -e "$r Give your device codename (without spaces) $o"
 read device_name
 
-#get kernel src git link
-echo -e "$g Link your kernel source $o"
-read kernel_git
-#get branch
-echo -e "$r Specify the branch to clone $o"
-read kernel_branch
+#get kernel src
+echo -e "$r Have you already downloaded/extracted/cloned the kernel source? $o"
+echo -e "yes - $g y $o"
+echo -e "no - $g n $o"
+read ans
+if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
+    then
+    #get kernel src folder that has akready been downloaded/extracted/cloned
+    echo -e "$g Copy and paste your kernel source folder location $o"
+    read kernel_folder
+    echo -e "$g Copying your source to mykernel working directory..... $o"
+    cp -rf $kernel_folder $kernel_srcs
+    for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
+    cd $kernel_srcs
+elif [ "$ans" == "n" ] || [ "$ans" == "N" ]
+    then
+    #get kernel src git link
+    echo -e "$g Link your kernel source $o"
+    read kernel_git
+    #get branch
+    echo -e "$r Specify the branch to clone $o"
+    read kernel_branch
+    #clone repo
+    cd $kernel_srcs
+    git clone $kernel_git -b $kernel_branch
+else
+    echo -e "$r What do you mean? $o"
+    exit
+fi
 
-#clone repo
-cd $kernel_srcs
-git clone $kernel_git -b $kernel_branch
 #make use of the folder name as kernel src var.| Recently created folder name, cutting '/'
 kernel_src=$kernel_srcs/$(ls -td -- */ | head -n 1 | cut -d'/' -f1)
 cd ..
