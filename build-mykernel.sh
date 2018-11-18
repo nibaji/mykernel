@@ -21,21 +21,21 @@ if [ ! -d "$mykernel_dir" ]
     then
     mkdir $mykernel_dir
 fi
-if [ ! -d "kernel_srcs" ]
+if [ ! -d "$kernel_srcs" ]
     then
-    mkdir $mykernel_dir/kernel_srcs
+    mkdir $kernel_srcs
 fi
-if [ ! -d "toolchains" ]
+if [ ! -d "$toolchains" ]
     then    
-    mkdir $mykernel_dir/toolchains
+    mkdir $toolchains
 fi
-if [ ! -d "out" ]
+if [ ! -d "$out_dir" ]
     then
-    mkdir $mykernel_dir/out
+    mkdir $out_dir
 fi
-if [ ! -d "zip" ]
+if [ ! -d "$zip_dir" ]
     then
-    mkdir $mykernel_dir/zip
+    mkdir $zip_dir
 fi
 
 #get device_name
