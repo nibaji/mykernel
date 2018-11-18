@@ -96,6 +96,7 @@ kernel_src=$kernel_srcs/$(ls -td -- */ | head -n 1 | cut -d'/' -f1)
 cd ..
 
 #choosing defconfig
+for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
 echo -e "$g Specify the defconfig to make (Copy paste one among the following) $o"
 ls $kernel_src/arch/arm64/configs
 for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
