@@ -74,10 +74,18 @@ elif [ "$ans" == "n" ] || [ "$ans" == "N" ]
     read kernel_git
     #get branch
     echo -e "$r Specify the branch to clone $o"
+    echo " Leave it blank and presss enter if you just wanna use the default branch "
     read kernel_branch
     #clone repo
     cd $kernel_srcs
-    git clone $kernel_git -b $kernel_branch
+    if [ -z $kernel_branch ] #assert if branch is specified or not
+        then
+        echo -e "$g Cloning default branch $o"
+        git clone $kernel_git
+    else
+        echo -e "$g Cloning $kernel_branch $o"
+        git clone $kernel_git -b $kernel_branch
+    fi
 else
     echo -e "$r What do you mean? $o"
     exit
