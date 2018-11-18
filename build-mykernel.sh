@@ -12,7 +12,11 @@ echo -e "\e[40;38;5;82m My $g  Kernel  $o"
 for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
 
 #initialise working directories and some variables
-mykernel_dir=$("pwd")
+mykernel_dir="$("pwd")/../mykernel-out"
+if [ ! -d "$mykernel_dir" ]
+    then
+    mkdir $mykernel_dir
+fi
 if [ ! -d "kernel_srcs" ]
     then
     mkdir $mykernel_dir/kernel_srcs
