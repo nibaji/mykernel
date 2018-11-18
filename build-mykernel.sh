@@ -91,7 +91,7 @@ else
     exit
 fi
 
-#make use of the folder name as kernel src var.| Recently created folder name, cutting '/'
+#make use of the folder name as kernel src var.| Recently modded folder name, cutting '/'
 kernel_src=$kernel_srcs/$(ls -td -- */ | head -n 1 | cut -d'/' -f1)
 cd ..
 
