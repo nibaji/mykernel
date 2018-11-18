@@ -52,10 +52,18 @@ if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
     #get kernel src folder that has akready been downloaded/extracted/cloned
     echo -e "$g Copy and paste your kernel source folder location $o"
     read kernel_folder
-    echo -e "$g Copying your source to mykernel working directory..... $o"
-    cp -rf $kernel_folder $kernel_srcs
-    for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
-    cd $kernel_srcs
+    if [ "$(realpath "$kernel_folder")" == "$(realpath "$kernel_srcs/$(basename "$kernel_folder")")" ]
+    then
+        for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
+        cd $kernel_srcs
+        mv $(basename "$kernel_folder") thisisthenamethatyoushouldntchoose
+        mv thisisthenamethatyoushouldntchoose "$(basename "$kernel_folder")" #to get it read as recently accessed folder for $kernel_src
+    else
+        echo -e "$g Copying your source to mykernel working directory..... $o"
+        cp -rf $kernel_folder $kernel_srcs
+        for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
+        cd $kernel_srcs
+    fi
 elif [ "$ans" == "n" ] || [ "$ans" == "N" ]
     then
     #get kernel src git link
