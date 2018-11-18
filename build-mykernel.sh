@@ -56,9 +56,10 @@ if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
     then
         for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
         cd $kernel_srcs
-        rm -rf thisisthenamethatyoushouldntchoose #just in case :p
-        mv $(basename "$kernel_folder") thisisthenamethatyoushouldntchoose
-        mv thisisthenamethatyoushouldntchoose "$(basename "$kernel_folder")" #to get it read as recently accessed folder for $kernel_src
+        #to get it read as recently modified folder for $kernel_src
+        touch idkwts
+        cp idkwts $(basename "$kernel_folder")
+        rm $(basename "$kernel_folder")/idkwts idkwts
     else
         echo -e "$g Copying your source to mykernel working directory..... $o"
         cp -rf $kernel_folder $kernel_srcs
