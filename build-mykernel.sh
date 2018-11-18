@@ -52,9 +52,10 @@ if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
     #get kernel src folder that has akready been downloaded/extracted/cloned
     echo -e "$g Copy and paste your kernel source folder location $o"
     read kernel_folder
+    for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
     if [ "$(realpath "$kernel_folder")" == "$(realpath "$kernel_srcs/$(basename "$kernel_folder")")" ]
     then
-        for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
+        echo -e "$g You have the source in right location $o"
         cd $kernel_srcs
         #to get it read as recently modified folder for $kernel_src
         touch idkwts
