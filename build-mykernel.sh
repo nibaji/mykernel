@@ -13,10 +13,22 @@ for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
 
 #initialise working directories and some variables
 mykernel_dir=$("pwd")
-mkdir $mykernel_dir/kernel_srcs
-mkdir $mykernel_dir/toolchains
-mkdir $mykernel_dir/out
-mkdir $mykernel_dir/zip
+if [ ! -d "kernel_srcs" ]
+    then
+    mkdir $mykernel_dir/kernel_srcs
+fi
+if [ ! -d "toolchains" ]
+    then    
+    mkdir $mykernel_dir/toolchains
+fi
+if [ ! -d "out" ]
+    then
+    mkdir $mykernel_dir/out
+fi
+if [ ! -d "zip" ]
+    then
+    mkdir $mykernel_dir/zip
+fi
 kernel_srcs="$mykernel_dir/kernel_srcs"
 toolchains="$mykernel_dir/toolchains"
 out_dir="$mykernel_dir/out"
