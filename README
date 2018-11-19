@@ -22,3 +22,5 @@ Steps in order
 11) Clones anykernel2  from https://github.com/osm0sis/AnyKernel2 by @osm0sis
 12) Appends 'mykernel' to kernel string, alters device/ramdisk specific lines in anykernel.sh
 13) Creates recovery flashable arm64 kernel zip.
+
+Read more on https://github.com/nibaji/mykernel/wiki/mykernel
