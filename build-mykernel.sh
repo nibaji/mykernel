@@ -109,6 +109,7 @@ echo -e "1 $b AOSP-GCC (4.9) $o"
 echo -e "2 $b ARM-GNU-GCC (8.2) $o"
 echo -e "3 $b Bootlin (Stable - gcc 6.4.0 & Bleeding Edge - gcc 8.2.0) $o"
 echo -e "4 $b Linaro (7.3.1) $o"
+echo -e "5 $r Custom/Unlisted toolchain $b(Have it extracted to a folder)$o $o"
 echo -e "Specify a number"
 read tc_opt
 
@@ -485,6 +486,16 @@ elif [ $tc_opt -eq 4 ] #linaro
         toolchain_dir="$toolchains/gcc-linaro-7.3.1-2018.05-x86_64_aarch64-linux-gnu"
         cc="$toolchain_dir/bin/aarch64-linux-gnu-"
     fi
+
+elif [ $tc_opt -eq 5 ] #custom toolchain/any other toolchain unlisted
+    then
+    echo -e "$r Copy paste the toolchain location below $o"
+    read toolchain_dir
+    echo -e "$r Mention the toolchain name (without spaces) $o"
+    read tc
+    cd "$toolchain_dir"/bin
+    cc=""$toolchain_dir"/bin/$(ls -S *addr2line | grep -v ^l | sed 's/addr2line//')"
+
 else
     echo -e "$r What was that $o"
     exit
