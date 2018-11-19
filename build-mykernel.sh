@@ -97,7 +97,7 @@ cd ..
 
 #choosing defconfig
 for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
-echo -e "$g Specify the defconfig to make (Copy paste one among the following) $o"
+echo -e "$g Specify the defconfig to make $o $r (Copy paste one among the following) $o"
 ls $kernel_src/arch/arm64/configs
 for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
 read def_config
@@ -105,10 +105,10 @@ read def_config
 #toolchain options
 for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
 echo -e "$r Choose a toolchain to cross compile $o"
-echo -e "1 $b AOSP-GCC (4.9) $o"
-echo -e "2 $b ARM-GNU-GCC (8.2) $o"
-echo -e "3 $b Bootlin (Stable - gcc 6.4.0 & Bleeding Edge - gcc 8.2.0) $o"
-echo -e "4 $b Linaro (7.3.1) $o"
+echo -e "1 $b AOSP-GCC $o $r (4.9) $o"
+echo -e "2 $b ARM-GNU-GCC $o $r (8.2) $o"
+echo -e "3 $b Bootlin $o $r (Stable - gcc 6.4.0 & Bleeding Edge - gcc 8.2.0) $o"
+echo -e "4 $b Linaro $o $r (7.3.1) $o"
 echo -e "5 $r Custom/Unlisted toolchain $b(Have it extracted to a folder)$o $o"
 echo -e "Specify a number"
 read tc_opt
@@ -511,7 +511,7 @@ for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
 echo -e "$g Making defconfig $o"
 make O=$out_dir ARCH=arm64 $def_config
 for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
-echo -e "$g Compiling $o"
+echo -e "$g Compiling with $o $b $tc $o"
 make -j$(nproc --all) O=$out_dir \
                       ARCH=arm64 \
                       SUBARCH=arm64 \
