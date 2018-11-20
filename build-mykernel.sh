@@ -512,8 +512,14 @@ rm -rf $out_dir
 mkdir $out_dir
 cd $kernel_src
 for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
-echo -e "$g Making defconfig $o"
-make -s O=$out_dir ARCH=arm64 $def_config | pv -t
+if [ ! -z $def_config ]
+    then
+    echo -e "$g Making $def_config $o"
+    make -s O=$out_dir ARCH=arm64 $def_config | pv -t
+else
+    echo -e "$r You should have choosen a defconfig from the list $o"
+    exit
+fi
 for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
 if [ ! -f  "$out_dir/.config" ]
     then
