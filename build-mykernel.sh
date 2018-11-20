@@ -3,6 +3,8 @@
 # Script by Nidhun Balaji T R <nidhunbalaji@gmail.com>
 # nibaji @github
 
+start_time=$(date +'%s')
+
 #initialise colours
 r="\e[30;48;5;160m"
 g="\e[30;48;5;82m"
@@ -545,3 +547,11 @@ else
     echo -e "$r Check what has gone wrong and try again $o"
 fi
 cd $mykernel_dir
+
+#time
+end_time=$(date +'%s')
+runtime_hr=$((("$end_time" - "$start_time")/3600))
+runtime_min=$(((("$end_time" - "$start_time")/60)%60))
+runtime_sec=$((("$end_time" - "$start_time")%60))
+runtime="$runtime_hr h : $runtime_min m : $runtime_sec s"
+echo -e "$r mykernel script ran for $runtime $o"
