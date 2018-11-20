@@ -513,7 +513,7 @@ mkdir $out_dir
 cd $kernel_src
 for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
 echo -e "$g Making defconfig $o"
-make O=$out_dir ARCH=arm64 $def_config
+make O=$out_dir ARCH=arm64 $def_config | pv -t
 for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
 echo -e "$g Compiling with $o$b $tc .. $o"
 make -j$(nproc --all) O=$out_dir \
@@ -521,7 +521,7 @@ make -j$(nproc --all) O=$out_dir \
                       SUBARCH=arm64 \
                       HEADER_ARCH=arm64 \
                       LD_LIBRARY_PATH="$toolchain_dir/lib" \
-                      CROSS_COMPILE="$cc"
+                      CROSS_COMPILE="$cc" | pv -t
 built_time=$(date +'%Y%m%d-%H%M')
 
 #zip it with AnyKernel2                      
