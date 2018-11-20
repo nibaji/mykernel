@@ -7,10 +7,13 @@ start_time=$(date +'%s')
 
 #initialise colours
 r="\e[30;48;5;160m"
+r1="\e[40;38;5;160m"
 g="\e[30;48;5;82m"
+g1="\e[40;38;5;82m"
 b="\e[30;48;5;20m"
+b1="\e[40;38;5;20m"
 o="\e[0m"
-echo -e "\e[40;38;5;82m My $g  Kernel  $o"
+echo -e "$g1 My $g  Kernel  $o"
 for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
 
 #initialise working directories and some variables
@@ -41,7 +44,7 @@ if [ ! -d "$zip_dir" ]
 fi
 
 #get device_name
-echo -e "$r Give your device codename (without spaces) $o"
+echo -e "$r Give your device codename $o$g without spaces $o"
 read device_name
 
 #get kernel src
@@ -58,6 +61,7 @@ if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
     if [ "$(realpath "$kernel_folder")" == "$(realpath "$kernel_srcs/$(basename "$kernel_folder")")" ]
     then
         echo -e "$g You have the source in right location $o"
+        for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
         cd $kernel_srcs
         #to get it read as recently modified folder for $kernel_src
         touch idkwts
@@ -75,17 +79,16 @@ elif [ "$ans" == "n" ] || [ "$ans" == "N" ]
     echo -e "$g Link your kernel source $o"
     read kernel_git
     #get branch
-    echo -e "$r Specify the branch to clone $o"
-    echo " Leave it blank and presss enter if you just wanna use the default branch "
+    echo -e "$r Specify the branch to clone $o$g Leave it blank and presss enter if you just wanna use the default branch $o"
     read kernel_branch
     #clone repo
     cd $kernel_srcs
     if [ -z $kernel_branch ] #assert if branch is specified or not
         then
-        echo -e "$g Cloning default branch $o"
+        echo -e "$g Cloning $o$b default branch.. $o"
         git clone $kernel_git
     else
-        echo -e "$g Cloning $kernel_branch $o"
+        echo -e "$g Cloning $o$b $kernel_branch .. $o"
         git clone $kernel_git -b $kernel_branch
     fi
 else
@@ -98,8 +101,7 @@ kernel_src=$kernel_srcs/$(ls -td -- */ | head -n 1 | cut -d'/' -f1)
 cd ..
 
 #choosing defconfig
-for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
-echo -e "$g Specify the defconfig to make $o $r (Copy paste one among the following) $o"
+echo -e "$g Specify the defconfig to make $o$b Copy paste one among the following $o"
 ls $kernel_src/arch/arm64/configs
 for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
 read def_config
@@ -513,7 +515,7 @@ for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
 echo -e "$g Making defconfig $o"
 make O=$out_dir ARCH=arm64 $def_config
 for i in {16..21} {21..16} ; do echo -en "\e[48;5;${i}m $o" ; done ; echo
-echo -e "$g Compiling with $o $b $tc $o"
+echo -e "$g Compiling with $o$b $tc .. $o"
 make -j$(nproc --all) O=$out_dir \
                       ARCH=arm64 \
                       SUBARCH=arm64 \
@@ -525,7 +527,8 @@ built_time=$(date +'%Y%m%d-%H%M')
 #zip it with AnyKernel2                      
 if [ -f  "$out_dir/arch/arm64/boot/Image.gz-dtb" ]
     then
-    echo -e "$g Fetching anykernel2 $o"
+    echo -e "$b Done!! $o"
+    echo -e "$g Fetching anykernel2.. $o"
     rm -rf $zip_dir
     git clone https://github.com/osm0sis/AnyKernel2 $zip_dir
     cd $zip_dir
@@ -553,5 +556,5 @@ end_time=$(date +'%s')
 runtime_hr=$((("$end_time" - "$start_time")/3600))
 runtime_min=$(((("$end_time" - "$start_time")/60)%60))
 runtime_sec=$((("$end_time" - "$start_time")%60))
-runtime="$runtime_hr h : $runtime_min m : $runtime_sec s"
-echo -e "$r mykernel script ran for $runtime $o"
+runtime="$r $runtime_hr $o$g1 h $o : $b $runtime_min $o$r1 m $o : $g $runtime_sec $o$b1 s $o"
+echo -e "$g1 mykernel script ran for $o $runtime"
