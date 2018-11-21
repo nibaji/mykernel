@@ -128,6 +128,18 @@ ls $kernel_src/arch/arm64/configs
 echo -e "$r1 ************************************************************************************************************************************************ $o"
 read def_config
 
+#build user and hostname
+echo -e "$r1 ******************************************************************************************** $o"
+echo -e "$g Give custom username for the build $o$r Leave blank and press enter if u wish to use the default$o"
+echo -e "$r1 ******************************************************************************************** $o"
+read blduser
+[ ! -z $blduser ] && export KBUILD_BUILD_USER="$blduser"
+echo -e "$r1 ******************************************************************************************** $o"
+echo -e "$g Give custom hostname for the build $o$r Leave blank and press enter if u wish to use the default$o"
+echo -e "$r1 ******************************************************************************************** $o"
+read bldhost
+[ ! -z $bldhost ] && export KBUILD_BUILD_HOST="$bldhost"
+
 #toolchain options
 echo -e "$r1 ********************************** $o"
 echo -e "$r Choose a toolchain to cross compile $o"
@@ -141,6 +153,12 @@ echo -e "$r1 ****************************************************************** 
 echo -e "Specify a number"
 echo -e "$r1 ****************************************************************** $o"
 read tc_opt
+
+#cflags
+echo -e "$r1 ********************************************************************************************************** $o"
+echo -e "$g Give optional cflags for the build $o$b1 Like $o$b -O2 -Wno-error $o$r Leave blank if u don't wanna use additional flags$o"
+echo -e "$r1 ********************************************************************************************************** $o"
+read cflgs
 
 #get toolchain
 cd $toolchains
@@ -698,24 +716,6 @@ if [ "$ans_cc32" == "y" ] || [ "$ans_cc32" == "Y" ]
 else
     echo "Okay!!"
 fi
-
-#cflags
-echo -e "$r1 ********************************************************************************************************** $o"
-echo -e "$g Give optional cflags for the build $o$b1 Like $o$b -O2 -Wno-error $o$r Leave blank if u don't wanna use additional flags$o"
-echo -e "$r1 ********************************************************************************************************** $o"
-read cflgs
-
-#build user and hostname
-echo -e "$r1 ******************************************************************************************** $o"
-echo -e "$g Give custom username for the build $o$r Leave blank and press enter if u wish to use the default$o"
-echo -e "$r1 ******************************************************************************************** $o"
-read blduser
-[ ! -z $blduser ] && export KBUILD_BUILD_USER="$blduser"
-echo -e "$r1 ******************************************************************************************** $o"
-echo -e "$g Give custom hostname for the build $o$r Leave blank and press enter if u wish to use the default$o"
-echo -e "$r1 ******************************************************************************************** $o"
-read bldhost
-[ ! -z $bldhost ] && export KBUILD_BUILD_HOST="$bldhost"
 
 #time to build
 echo -e "$r1 ********************** $o"
