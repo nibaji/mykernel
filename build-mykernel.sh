@@ -699,6 +699,12 @@ else
     echo "Okay!!"
 fi
 
+#cflags
+echo -e "$r1 ********************************************************************************************************** $o"
+echo -e "$g Give optional cflags for the build $o$b1 Like $o$b -O2 -Wno-error $o$r Leave blank if u don't wanna use additional flags$o"
+echo -e "$r1 ********************************************************************************************************** $o"
+read cflgs
+
 #time to build
 echo -e "$r1 ********************** $o"
 echo -e "$g Cleaning up directories $o"
@@ -725,21 +731,45 @@ else
     echo -e "$g Compiling with $o$b $tc .. $o"
     echo -e "$r1 *************************** $o"
     if [ "$ans_cc32" == "y" ] || [ "$ans_cc32" == "Y" ]
-    then
-        make -s -j$(nproc --all) O=$out_dir \
+        then
+        if [ -z $cflgs ]
+            then
+            make -s -j$(nproc --all) O=$out_dir \
                                 ARCH=arm64 \
                                 SUBARCH=arm64 \
                                 HEADER_ARCH=arm64 \
                                 LD_LIBRARY_PATH="$toolchain_dir/lib" \
                                 CROSS_COMPILE="$cc" \
                                 CROSS_COMPILE_ARM32="$CC32" | pv -t
+        else
+            make -s -j$(nproc --all) O=$out_dir \
+                                ARCH=arm64 \
+                                SUBARCH=arm64 \
+                                HEADER_ARCH=arm64 \
+                                KBUILD_CFLAGS="$cflgs" \
+                                LD_LIBRARY_PATH="$toolchain_dir/lib" \
+                                CROSS_COMPILE="$cc" \
+                                CROSS_COMPILE_ARM32="$CC32" | pv -t
+        fi
+            
     else
-        make -s -j$(nproc --all) O=$out_dir \
+        if [ -z $cflgs ]
+            then
+            make -s -j$(nproc --all) O=$out_dir \
                                 ARCH=arm64 \
                                 SUBARCH=arm64 \
                                 HEADER_ARCH=arm64 \
                                 LD_LIBRARY_PATH="$toolchain_dir/lib" \
                                 CROSS_COMPILE="$cc" | pv -t
+        else
+            make -s -j$(nproc --all) O=$out_dir \
+                                ARCH=arm64 \
+                                SUBARCH=arm64 \
+                                HEADER_ARCH=arm64 \
+                                KBUILD_CFLAGS="$cflgs" \
+                                LD_LIBRARY_PATH="$toolchain_dir/lib" \
+                                CROSS_COMPILE="$cc" | pv -t
+        fi
     fi
 fi
 built_time=$(date +'%Y%m%d-%H%M')
