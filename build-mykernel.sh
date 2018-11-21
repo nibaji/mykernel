@@ -660,6 +660,45 @@ else
     exit
 fi
 
+#use CROSS_COMPILE_ARM32?
+echo -e "$r1 ************************************** $o"
+echo -e "$r Do you want to use CROSS_COMPILE_ARM32? $o"
+echo -e "$r1 ************************************** $o"
+echo -e "yes - $g y $o"
+echo -e "no - $g n $o"
+echo -e "$r1 ************************************** $o"
+read ans_cc32
+if [ "$ans_cc32" == "y" ] || [ "$ans_cc32" == "Y" ]
+    then
+    echo -e "$r1 ************* $o"
+    echo -e "$g Already cloned? $o"
+    echo -e "$r1 ************* $o"
+    echo -e "yes - $g y $o"
+    echo -e "no - $g n $o"
+    echo -e "$r1 ************* $o"
+    read ans
+    if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
+    then
+        echo -e "$r1 *********************************** $o"
+        echo -e "$g Copy paste arm32 toolchain directory $o"
+        echo -e "$r1 *********************************** $o"
+        read toolchain32_dir
+        cd "$toolchain32_dir"/bin
+        cc32=""$toolchain32_dir"/bin/$(ls -S *addr2line | grep -v ^l | sed 's/addr2line//')"
+    else
+        cd $toolchains
+        echo -e "$r1 ***************************** $o"
+        echo -e "$g Cloning arm 4.9 gcc prebuilt.. $o"
+        echo -e "$r1 ***************************** $o"
+        git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9
+        toolchain32_dir="$toolchains/arm-linux-androideabi-4.9"
+        cd "$toolchain32_dir"/bin
+        cc32=""$toolchain32_dir"/bin/arm-linux-androideabi-"
+    fi
+else
+    echo "Okay!!"
+fi
+
 #time to build
 echo -e "$r1 ********************** $o"
 echo -e "$g Cleaning up directories $o"
@@ -685,12 +724,23 @@ else
     echo -e "$r1 *************************** $o"
     echo -e "$g Compiling with $o$b $tc .. $o"
     echo -e "$r1 *************************** $o"
-    make -s -j$(nproc --all) O=$out_dir \
-                            ARCH=arm64 \
-                            SUBARCH=arm64 \
-                            HEADER_ARCH=arm64 \
-                            LD_LIBRARY_PATH="$toolchain_dir/lib" \
-                            CROSS_COMPILE="$cc" | pv -t
+    if [ "$ans_cc32" == "y" ] || [ "$ans_cc32" == "Y" ]
+    then
+        make -s -j$(nproc --all) O=$out_dir \
+                                ARCH=arm64 \
+                                SUBARCH=arm64 \
+                                HEADER_ARCH=arm64 \
+                                LD_LIBRARY_PATH="$toolchain_dir/lib" \
+                                CROSS_COMPILE="$cc" \
+                                CROSS_COMPILE_ARM32="$CC32" | pv -t
+    else
+        make -s -j$(nproc --all) O=$out_dir \
+                                ARCH=arm64 \
+                                SUBARCH=arm64 \
+                                HEADER_ARCH=arm64 \
+                                LD_LIBRARY_PATH="$toolchain_dir/lib" \
+                                CROSS_COMPILE="$cc" | pv -t
+    fi
 fi
 built_time=$(date +'%Y%m%d-%H%M')
 
