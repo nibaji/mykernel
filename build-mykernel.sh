@@ -705,6 +705,18 @@ echo -e "$g Give optional cflags for the build $o$b1 Like $o$b -O2 -Wno-error $o
 echo -e "$r1 ********************************************************************************************************** $o"
 read cflgs
 
+#build user and hostname
+echo -e "$r1 ******************************************************************************************** $o"
+echo -e "$g Give custom username for the build $o$r Leave blank and press enter if u wish to use the default$o"
+echo -e "$r1 ******************************************************************************************** $o"
+read blduser
+[ ! -z $blduser ] && export KBUILD_BUILD_USER="$blduser"
+echo -e "$r1 ******************************************************************************************** $o"
+echo -e "$g Give custom hostname for the build $o$r Leave blank and press enter if u wish to use the default$o"
+echo -e "$r1 ******************************************************************************************** $o"
+read bldhost
+[ ! -z $bldhost ] && export KBUILD_BUILD_HOST="$bldhost"
+
 #time to build
 echo -e "$r1 ********************** $o"
 echo -e "$g Cleaning up directories $o"
