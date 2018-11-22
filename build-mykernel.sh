@@ -51,6 +51,21 @@ echo -e "$r Give your device codename $o$g without spaces $o"
 echo -e "$r1 ***************************************** $o"
 read device_name
 
+#to assert or not
+echo -e "$r1 ****************************************************** $o"
+echo -e "$r Should anykernel assert with codenames before flashing? $o"
+echo -e "$r1 ****************************************************** $o"
+echo -e "yes - $g y $o"
+echo -e "no - $g n $o"
+read asrt_ans
+if [ "$asrt_ans" == "y" ] || [ "$asrt_ans" == "Y" ]
+    then
+    echo -e "$r1 ********************************************************************************************************** $o"
+    echo -e "$r Give your another name to assert. Codename is ready to be asserted already. Or leave blank if that's enough $o"
+    echo -e "$r1 ********************************************************************************************************** $o"
+    read $device_name1
+fi
+
 #get kernel src
 echo -e "$r1 ************************************************************** $o"
 echo -e "$r Have you already downloaded/extracted/cloned the kernel source? $o"
@@ -802,7 +817,16 @@ if [ -f  "$out_dir/arch/arm64/boot/Image.gz-dtb" ]
     cp  $out_dir/arch/arm64/boot/Image.gz-dtb $zip_dir
     mv Image.gz-dtb zImage
     sed -i 's/ExampleKernel by osm0sis @ xda-developers/mykernel/g' anykernel.sh
-    sed -i 's/do.devicecheck=1/do.devicecheck=0/g' anykernel.sh
+    if [ "$asrt_ans" != "y" ] || [ "$asrt_ans" != "Y" ]
+        then
+        sed -i 's/do.devicecheck=1/do.devicecheck=0/g' anykernel.sh
+        sed -i 's/maguro/'$device_name'/g' anykernel.sh
+        sed -i 's/toro//g' anykernel.sh && sed -i 's/toroplus//g' anykernel.sh
+    else 
+        sed -i 's/maguro/'$device_name'/g' anykernel.sh
+        sed -i 's/toro/'$device_name1'/g' anykernel.sh
+        sed -i 's/toroplus//g' anykernel.sh
+    fi
     sed -i 's/platform\/\omap\/\omap_hsmmc.0/bootdevice/g' anykernel.sh
     sed -i '/# AnyKernel file attributes/{/write_boot/!d;}' anykernel.sh
     sed -i '/ramdisk/{/write_boot/!d;}' anykernel.sh
