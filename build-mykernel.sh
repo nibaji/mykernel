@@ -731,7 +731,7 @@ if [ "$ans_cc32" == "y" ] || [ "$ans_cc32" == "Y" ]
         echo -e "$g1 Leave blank if $r1 aosp arm-linux-androideabi-4.9 $o toolchain has already been cloned in $r1 $(realpath $toolchains)$o$o"
         echo -e "$r1 ****************************************************************************************************************************************** $o"
         read toolchain32_dir
-        [ -z $toolchain32_dir ] && toolchain32_dir="$toolchain/arm-linux-androideabi-4.9"
+        [ -z $toolchain32_dir ] && toolchain32_dir="$toolchains/arm-linux-androideabi-4.9"
         cd "$toolchain32_dir"/bin
         cc32=""$toolchain32_dir"/bin/$(ls -S *addr2line | grep -v ^l | sed 's/addr2line//')"
     else
