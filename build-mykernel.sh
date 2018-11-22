@@ -857,6 +857,10 @@ if [ -f  "$out_dir/arch/arm64/boot/Image.gz-dtb" ]
     echo -e "$r1 ********************************************************************** $o"
     echo -e "$g $krnl_name - $krnl_rev is ready in $zip_dir $o"
     echo -e "$r1 ********************************************************************** $o"
+    echo -e "$r $g1 Kernel : $zip_dir/$krnl_name-$tc-$device_name-$krnl_rev-$built_time $o $zip_dir $o"
+    echo -e "$r $g1 Size   : $(du -h *.zip | sed 's/'$krnl_name-$tc-$device_name-$krnl_rev-$built_time'.zip/') $o $o"
+    echo -e "$r $g1 md5sum : $(md5sum *.zip | sed 's/'$krnl_name-$tc-$device_name-$krnl_rev-$built_time'.zip/') $o $o"
+    echo -e "$g1 ********************************************************************** $o"
 else
     echo -e "$r Check what has gone wrong and try again $o"
 fi
