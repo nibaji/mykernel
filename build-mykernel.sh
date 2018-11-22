@@ -746,7 +746,7 @@ fi
 echo -e "$r1 ********************************************************************************************************** $o"
 echo -e "$g Give optional cflags for the build $o$b1 Like $o$b -O2 -Wno-error $o$r Leave blank if u don't wanna use additional flags $o"
 echo -e "$r1 ********************************************************************************************************** $o"
-read -t 60 -p $(pv -t)cflgs
+read -t 60 cflgs
 
 #time to build
 echo -e "$r1 ********************** $o"
