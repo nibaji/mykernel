@@ -838,11 +838,11 @@ if [ -f  "$out_dir/arch/arm64/boot/Image.gz-dtb" ]
         then
         sed -i 's/do.devicecheck=1/do.devicecheck=0/g' anykernel.sh
         sed -i 's/maguro/'$device_name'/g' anykernel.sh
-        sed -i 's/toro//g' anykernel.sh && sed -i 's/toroplus//g' anykernel.sh
+        sed -i 's/toro//g' anykernel.sh && sed -i 's/plus//g' anykernel.sh
     else 
         sed -i 's/maguro/'$device_name'/g' anykernel.sh
         sed -i 's/toro/'$device_name1'/g' anykernel.sh
-        sed -i 's/toroplus//g' anykernel.sh
+        sed -i 's/plus//g' anykernel.sh
     fi
     sed -i 's/platform\/\omap\/\omap_hsmmc.0/bootdevice/g' anykernel.sh
     sed -i '/# AnyKernel file attributes/{/write_boot/!d;}' anykernel.sh
