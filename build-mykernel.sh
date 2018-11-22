@@ -49,14 +49,14 @@ fi
 echo -e "$r1 ***************************************************************** $o"
 echo -e "$r Give your kernel a name $o$g Leave blank if you wanna use the default $o"
 echo -e "$r1 ***************************************************************** $o"
-read krnl_name
+read -t 15 krnl_name
 [ -z $krnl_name ] && krnl_name="mykernel"
 
 #get kernel_name
 echo -e "$r1 ********************************************************************* $o"
 echo -e "$r Give your kernel, a version $o$g Leave blank if you wanna use the default $o"
 echo -e "$r1 ********************************************************************* $o"
-read krnl_rev
+read -t 15 krnl_rev
 
 #get device_name
 echo -e "$r1 ***************************************** $o"
@@ -70,13 +70,13 @@ echo -e "$r Should anykernel assert with codenames before flashing? $o"
 echo -e "$r1 ****************************************************** $o"
 echo -e "yes - $g y $o"
 echo -e "no  - $r n $o"
-read asrt_ans
+read -t 15 asrt_ans
 if [ "$asrt_ans" == "y" ] || [ "$asrt_ans" == "Y" ]
     then
     echo -e "$r1 ********************************************************************************************************** $o"
     echo -e "$r Give your another name to assert. $o$g Codename is ready to be asserted already. Or leave blank if that's enough $o"
     echo -e "$r1 ********************************************************************************************************** $o"
-    read $device_name1
+    read -t 15 $device_name1
 fi
 
 #get kernel src
@@ -160,12 +160,12 @@ read def_config
 echo -e "$r1 ******************************************************************************************** $o"
 echo -e "$g Give custom username for the build $o$r Leave blank and press enter if u wish to use the default$o"
 echo -e "$r1 ******************************************************************************************** $o"
-read blduser
+read -t 15 blduser
 [ ! -z $blduser ] && export KBUILD_BUILD_USER="$blduser"
 echo -e "$r1 ******************************************************************************************** $o"
 echo -e "$g Give custom hostname for the build $o$r Leave blank and press enter if u wish to use the default$o"
 echo -e "$r1 ******************************************************************************************** $o"
-read bldhost
+read -t 15 bldhost
 [ ! -z $bldhost ] && export KBUILD_BUILD_HOST="$bldhost"
 
 #toolchain options
@@ -691,7 +691,7 @@ elif [ $tc_opt -eq 5 ] #custom toolchain/any other toolchain unlisted
     echo -e "$r1 **************************************** $o"
     echo -e "$r Mention the toolchain name $o$g (without spaces) $o"
     echo -e "$r1 **************************************** $o"
-    read tc
+    read -t 15 tc
     cd "$toolchain_dir"/bin
     cc=""$toolchain_dir"/bin/$(ls -S *addr2line | grep -v ^l | sed 's/addr2line//')"
 
@@ -707,7 +707,7 @@ echo -e "$r1 ************************************** $o"
 echo -e "yes - $g y $o"
 echo -e "no  - $r n $o"
 echo -e "$r1 ************************************** $o"
-read ans_cc32
+read -t 15 ans_cc32
 if [ "$ans_cc32" == "y" ] || [ "$ans_cc32" == "Y" ]
     then
     echo -e "$r1 ************* $o"
@@ -724,7 +724,7 @@ if [ "$ans_cc32" == "y" ] || [ "$ans_cc32" == "Y" ]
         echo -e "$r1 *********************************** $o"
         echo -e "$g1 Leave blank if $r1 aosp arm-linux-androideabi-4.9 $o toolchain has already been cloned in $r1 $(realpath $toolchains)$o$o"
         echo -e "$r1 ****************************************************************************************************************************************** $o"
-        read toolchain32_dir
+        read -t 15 toolchain32_dir
         [ -z $toolchain32_dir ] && toolchain32_dir="$toolchains/arm-linux-androideabi-4.9"
         cd "$toolchain32_dir"/bin
         cc32=""$toolchain32_dir"/bin/$(ls -S *addr2line | grep -v ^l | sed 's/addr2line//')"
