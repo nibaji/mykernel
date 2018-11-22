@@ -73,6 +73,12 @@ echo -e "$r1 ************************************************************** $o"
 read krnl_name
 [ -z $krnl_name ] && krnl_name="mykernel"
 
+#get kernel_name
+echo -e "$r1 ****************************************************************** $o"
+echo -e "$r Give your kernel, a version $o$g Leave blank if you wanna use the default $o"
+echo -e "$r1 ****************************************************************** $o"
+read krnl_rev
+
 #get kernel src
 echo -e "$r1 ************************************************************** $o"
 echo -e "$r Have you already downloaded/extracted/cloned the kernel source? $o"
@@ -746,6 +752,7 @@ echo -e "$r1 ********************** $o"
 rm -rf $out_dir
 mkdir $out_dir
 cd $kernel_src
+[ -z $krnl_rev ] && krnl_rev=$(git branch | grep \* | cut -d ' ' -f2) #use branch name as kernel version if option left blank
 if [ ! -z $def_config ]
     then
     echo -e "$r1 ********************** $o"
@@ -823,7 +830,7 @@ if [ -f  "$out_dir/arch/arm64/boot/Image.gz-dtb" ]
     rm -rf modules patch ramdisk *.md
     cp  $out_dir/arch/arm64/boot/Image.gz-dtb $zip_dir
     mv Image.gz-dtb zImage
-    sed -i 's/ExampleKernel by osm0sis @ xda-developers/'$krnl_name'/g' anykernel.sh
+    sed -i 's/ExampleKernel by osm0sis @ xda-developers/'$krnl_name'-'$krnl_rev'/g' anykernel.sh
     if [ "$asrt_ans" != "y" ] || [ "$asrt_ans" != "Y" ]
         then
         sed -i 's/do.devicecheck=1/do.devicecheck=0/g' anykernel.sh
@@ -844,9 +851,9 @@ if [ -f  "$out_dir/arch/arm64/boot/Image.gz-dtb" ]
     echo -e "$g zipping.. $o"
     echo -e "$r1 ******** $o"
     zip -r9 mykernel-$tc-$device_name--$built_time *
-    echo -e "$r1 ****************************** $o"
-    echo -e "$g $krnl_name is ready to be flashed. $o"
-    echo -e "$r1 ****************************** $o"
+    echo -e "$r1 ********************************************* $o"
+    echo -e "$g $krnl_name - $krnl_rev is ready to be flashed. $o"
+    echo -e "$r1 ********************************************* $o"
 else
     echo -e "$r Check what has gone wrong and try again $o"
 fi
