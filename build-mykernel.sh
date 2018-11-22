@@ -850,7 +850,7 @@ if [ -f  "$out_dir/arch/arm64/boot/Image.gz-dtb" ]
     echo -e "$r1 ******** $o"
     echo -e "$g zipping.. $o"
     echo -e "$r1 ******** $o"
-    zip -r9 mykernel-$tc-$device_name--$built_time *
+    zip -r9 $krnl_name-$tc-$device_name-$krnl_rev-$built_time *
     echo -e "$r1 ********************************************* $o"
     echo -e "$g $krnl_name - $krnl_rev is ready to be flashed. $o"
     echo -e "$r1 ********************************************* $o"
