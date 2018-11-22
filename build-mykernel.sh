@@ -76,7 +76,7 @@ if [ "$asrt_ans" == "y" ] || [ "$asrt_ans" == "Y" ]
     echo -e "$r1 ********************************************************************************************************** $o"
     echo -e "$r Give your another name to assert. $o$g Codename is ready to be asserted already. Or leave blank if that's enough $o"
     echo -e "$r1 ********************************************************************************************************** $o"
-    read -t 15 $device_name1
+    read -t 15 device_name1
 fi
 
 #get kernel src
