@@ -854,13 +854,16 @@ if [ -f  "$out_dir/arch/arm64/boot/Image.gz-dtb" ]
     echo -e "$g zipping.. $o"
     echo -e "$r1 ******** $o"
     zip -r9 $krnl_name-$tc-$device_name-$krnl_rev-$built_time *
-    echo -e "$r1 ********************************************************************** $o"
-    echo -e "$g $krnl_name - $krnl_rev is ready in $zip_dir $o"
-    echo -e "$r1 ********************************************************************** $o"
-    echo -e "$r $g1 Kernel : $(realpath $zip_dir/*.zip) $o $o"
-    echo -e "$r $g1 Size   : $(du -h *.zip | sed 's/'$krnl_name-$tc-$device_name-$krnl_rev-$built_time'.zip//') $o $o"
-    echo -e "$r $g1 md5sum : $(md5sum *.zip | sed 's/'$krnl_name-$tc-$device_name-$krnl_rev-$built_time'.zip//') $o $o"
-    echo -e "$g1 ********************************************************************** $o"
+    echo -e "$r1 **************************** $o"
+    echo -e "$g $krnl_name - $krnl_rev is ready $o"
+    echo -e "$r1 **************************** $o"
+    echo -e "$g1 *********************************************************************************************************************************************** $o"
+    echo -e "$r                                                                                                                                                  $o"
+    echo -e "$r $r1 Kernel$o : $g1$(realpath $zip_dir/*.zip) $o $o"
+    echo -e "$r $r1 Size$o   : $g1$(du -h *.zip | sed 's/'$krnl_name-$tc-$device_name-$krnl_rev-$built_time'.zip//') $o $o"
+    echo -e "$r $r1 md5sum$o : $g1$(md5sum *.zip | sed 's/'$krnl_name-$tc-$device_name-$krnl_rev-$built_time'.zip//') $o $o"
+    echo -e "$r                                                                                                                                                  $o"
+    echo -e "$g1 *********************************************************************************************************************************************** $o"
 else
     echo -e "$r Check what has gone wrong and try again $o"
 fi
