@@ -182,12 +182,6 @@ echo -e "Specify an option number"
 echo -e "$r1 ******************** $o"
 read tc_opt
 
-#cflags
-echo -e "$r1 ********************************************************************************************************** $o"
-echo -e "$g Give optional cflags for the build $o$b1 Like $o$b -O2 -Wno-error $o$r Leave blank if u don't wanna use additional flags $o"
-echo -e "$r1 ********************************************************************************************************** $o"
-read cflgs
-
 #get toolchain
 cd $toolchains
 if [ $tc_opt -eq 1 ] #aosp-gcc
@@ -747,6 +741,12 @@ if [ "$ans_cc32" == "y" ] || [ "$ans_cc32" == "Y" ]
 else
     echo "Okay!!"
 fi
+
+#cflags
+echo -e "$r1 ********************************************************************************************************** $o"
+echo -e "$g Give optional cflags for the build $o$b1 Like $o$b -O2 -Wno-error $o$r Leave blank if u don't wanna use additional flags $o"
+echo -e "$r1 ********************************************************************************************************** $o"
+read cflgs
 
 #time to build
 echo -e "$r1 ********************** $o"
