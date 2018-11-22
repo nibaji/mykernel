@@ -66,6 +66,13 @@ if [ "$asrt_ans" == "y" ] || [ "$asrt_ans" == "Y" ]
     read $device_name1
 fi
 
+#get kernel_name
+echo -e "$r1 ************************************************************** $o"
+echo -e "$r Give your kernel a name $o$g Leave blank if you wanna use the default $o"
+echo -e "$r1 ************************************************************** $o"
+read krnl_name
+[ -z $krnl_name ] && krnl_name="mykernel"
+
 #get kernel src
 echo -e "$r1 ************************************************************** $o"
 echo -e "$r Have you already downloaded/extracted/cloned the kernel source? $o"
@@ -816,7 +823,7 @@ if [ -f  "$out_dir/arch/arm64/boot/Image.gz-dtb" ]
     rm -rf modules patch ramdisk *.md
     cp  $out_dir/arch/arm64/boot/Image.gz-dtb $zip_dir
     mv Image.gz-dtb zImage
-    sed -i 's/ExampleKernel by osm0sis @ xda-developers/mykernel/g' anykernel.sh
+    sed -i 's/ExampleKernel by osm0sis @ xda-developers/'$krnl_name'/g' anykernel.sh
     if [ "$asrt_ans" != "y" ] || [ "$asrt_ans" != "Y" ]
         then
         sed -i 's/do.devicecheck=1/do.devicecheck=0/g' anykernel.sh
@@ -838,7 +845,7 @@ if [ -f  "$out_dir/arch/arm64/boot/Image.gz-dtb" ]
     echo -e "$r1 ******** $o"
     zip -r9 mykernel-$tc-$device_name--$built_time *
     echo -e "$r1 ****************************** $o"
-    echo -e "$g mykernel is ready to be flashed. $o"
+    echo -e "$g $krnl_name is ready to be flashed. $o"
     echo -e "$r1 ****************************** $o"
 else
     echo -e "$r Check what has gone wrong and try again $o"
