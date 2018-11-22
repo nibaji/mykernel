@@ -853,6 +853,7 @@ if [ -f  "$out_dir/arch/arm64/boot/Image.gz-dtb" ]
     echo -e "$r1 ******** $o"
     echo -e "$g zipping.. $o"
     echo -e "$r1 ******** $o"
+    tc=$(echo $tc | sed 's/\./_/g') #dot char breaks the zip filename
     zip -r9 $krnl_name-$tc-$device_name-$krnl_rev-$built_time *
     echo -e "$r1 **************************** $o"
     echo -e "$g $krnl_name - $krnl_rev is ready $o"
