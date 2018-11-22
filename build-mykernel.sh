@@ -69,12 +69,12 @@ echo -e "$r1 ****************************************************** $o"
 echo -e "$r Should anykernel assert with codenames before flashing? $o"
 echo -e "$r1 ****************************************************** $o"
 echo -e "yes - $g y $o"
-echo -e "no - $g n $o"
+echo -e "no  - $r n $o"
 read asrt_ans
 if [ "$asrt_ans" == "y" ] || [ "$asrt_ans" == "Y" ]
     then
     echo -e "$r1 ********************************************************************************************************** $o"
-    echo -e "$r Give your another name to assert. Codename is ready to be asserted already. Or leave blank if that's enough $o"
+    echo -e "$r Give your another name to assert. $o$g Codename is ready to be asserted already. Or leave blank if that's enough $o"
     echo -e "$r1 ********************************************************************************************************** $o"
     read $device_name1
 fi
@@ -84,7 +84,7 @@ echo -e "$r1 ************************************************************** $o"
 echo -e "$r Have you already downloaded/extracted/cloned the kernel source? $o"
 echo -e "$r1 ************************************************************** $o"
 echo -e "yes - $g y $o"
-echo -e "no - $g n $o"
+echo -e "no  - $r n $o"
 read ans
 if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
     then
@@ -184,7 +184,7 @@ read tc_opt
 
 #cflags
 echo -e "$r1 ********************************************************************************************************** $o"
-echo -e "$g Give optional cflags for the build $o$b1 Like $o$b -O2 -Wno-error $o$r Leave blank if u don't wanna use additional flags$o"
+echo -e "$g Give optional cflags for the build $o$b1 Like $o$b -O2 -Wno-error $o$r Leave blank if u don't wanna use additional flags $o"
 echo -e "$r1 ********************************************************************************************************** $o"
 read cflgs
 
@@ -202,7 +202,7 @@ if [ $tc_opt -eq 1 ] #aosp-gcc
         echo -e "$r Toolchain has already been cloned? $o"
         echo -e "$r1 ********************************* $o"
         echo -e "yes -$g y $o"
-        echo -e "no - $g n $o"
+        echo -e "no  - $r n $o"
         echo -e "$r1 ********************************* $o"
         read ans
         if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
@@ -243,7 +243,7 @@ elif [ $tc_opt -eq 2 ] #arm-gnu-gcc
         echo -e "$r You already have downloaded and extracted the toolchain? $o"
         echo -e "$r1 ******************************************************* $o"
         echo -e "yes - $g y $o"
-        echo -e "no - $g n $o"
+        echo -e "no  - $r n $o"
         echo -e "$r1 ******************************************************* $o"
         read ans
         if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
@@ -256,7 +256,7 @@ elif [ $tc_opt -eq 2 ] #arm-gnu-gcc
             echo -e "$r You already have downloaded the toolchain tarball? $o"
             echo -e "$r1 ************************************************* $o"
             echo -e "yes - $g y $o"
-            echo -e "no - $g n $o"
+            echo -e "no  - $r n $o"
             echo -e "$r1 ************************************************* $o"
             read ans
             if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
@@ -303,7 +303,7 @@ elif [ $tc_opt -eq 2 ] #arm-gnu-gcc
         echo -e "$r You already have downloaded the toolchain tarball? $o"
         echo -e "$r1 ************************************************* $o"
         echo -e "yes - $g y $o"
-        echo -e "no - $g n $o"
+        echo -e "no  - $r n $o"
         echo -e "$r1 ************************************************* $o"
         read ans
         if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
@@ -369,7 +369,7 @@ elif [ $tc_opt -eq 3 ] #bootlin
                 echo -e "$r You already have downloaded and extracted the toolchain? $o"
                 echo -e "$r1 ****************************************************** $o"
                 echo -e "yes - $g y $o"
-                echo -e "no - $g n $o"
+                echo -e "no  - $r n $o"
                 echo -e "$r1 ***************************************************** $o"
                 read ans
                 if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
@@ -382,7 +382,7 @@ elif [ $tc_opt -eq 3 ] #bootlin
                     echo -e "$r You already have downloaded the toolchain tarball? $o"
                     echo -e "$r1 ************************************************* $o"
                     echo -e "yes - $g y $o"
-                    echo -e "no - $g n $o"
+                    echo -e "no  - $r n $o"
                     echo -e "$r1 ************************************************* $o"
                     read ans
                     if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
@@ -428,7 +428,7 @@ elif [ $tc_opt -eq 3 ] #bootlin
                 echo -e "$r You already have downloaded the toolchain tarball? $o"
                 echo -e "$r1 ************************************************* $o"
                 echo -e "yes - $g y $o"
-                echo -e "no - $g n $o"
+                echo -e "no  - $r n $o"
                 echo -e "$r1 ************************************************* $o"
                 read ans
                 if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
@@ -477,7 +477,7 @@ elif [ $tc_opt -eq 3 ] #bootlin
                 echo -e "$r You already have downloaded and extracted the toolchain? $o"
                 echo -e "$r1 ****************************************************** $o"
                 echo -e "yes - $g y $o"
-                echo -e "no - $g n $o"
+                echo -e "no  - $r n $o"
                 echo -e "$r1 ****************************************************** $o"
                 read ans
                 if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
@@ -490,7 +490,7 @@ elif [ $tc_opt -eq 3 ] #bootlin
                     echo -e "$r You already have downloaded the toolchain tarball? $o"
                     echo -e "$r1 ************************************************* $o"
                     echo -e "yes - $g y $o"
-                    echo -e "no - $g n $o"
+                    echo -e "no  - $r n $o"
                     echo -e "$r1 ************************************************ $o"
                     read ans
                     if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
@@ -534,7 +534,7 @@ elif [ $tc_opt -eq 3 ] #bootlin
                 echo -e "$r You already have downloaded the toolchain tarball? $o"
                 echo -e "$r1 ************************************************ $o"
                 echo -e "yes - $g y $o"
-                echo -e "no - $g n $o"
+                echo -e "no  - $r n $o"
                 echo -e "$r1 ************************************************ $o"
                 read ans
                 if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
@@ -588,7 +588,7 @@ elif [ $tc_opt -eq 4 ] #linaro
         echo -e "$r You already have downloaded and extracted the toolchain? $o"
         echo -e "$r1 ******************************************************* $o"
         echo -e "yes - $g y $o"
-        echo -e "no - $g n $o"
+        echo -e "no  - $r n $o"
         echo -e "$r1 ******************************************************* $o"
         read ans
         if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
@@ -601,7 +601,7 @@ elif [ $tc_opt -eq 4 ] #linaro
             echo -e "$r You already have downloaded the toolchain tarball? $o"
             echo -e "$r1 ************************************************* $o"
             echo -e "yes - $g y $o"
-            echo -e "no - $g n $o"
+            echo -e "no  - $r n $o"
             echo -e "$r1 ************************************************* $o"
             read ans
             if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
@@ -647,7 +647,7 @@ elif [ $tc_opt -eq 4 ] #linaro
         echo -e "$r You already have downloaded the toolchain tarball? $o"
         echo -e "$r1 ************************************************* $o"
         echo -e "yes - $g y $o"
-        echo -e "no - $g n $o"
+        echo -e "no  - $r n $o"
         echo -e "$r1 ************************************************* $o"
         read ans
         if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
@@ -695,7 +695,7 @@ elif [ $tc_opt -eq 5 ] #custom toolchain/any other toolchain unlisted
     echo -e "$r1 ************************************** $o"
     read toolchain_dir
     echo -e "$r1 **************************************** $o"
-    echo -e "$r Mention the toolchain name (without spaces) $o"
+    echo -e "$r Mention the toolchain name $o$g (without spaces) $o"
     echo -e "$r1 **************************************** $o"
     read tc
     cd "$toolchain_dir"/bin
@@ -711,7 +711,7 @@ echo -e "$r1 ************************************** $o"
 echo -e "$r Do you want to use CROSS_COMPILE_ARM32? $o"
 echo -e "$r1 ************************************** $o"
 echo -e "yes - $g y $o"
-echo -e "no - $g n $o"
+echo -e "no  - $r n $o"
 echo -e "$r1 ************************************** $o"
 read ans_cc32
 if [ "$ans_cc32" == "y" ] || [ "$ans_cc32" == "Y" ]
@@ -720,7 +720,7 @@ if [ "$ans_cc32" == "y" ] || [ "$ans_cc32" == "Y" ]
     echo -e "$g Already cloned? $o"
     echo -e "$r1 ************* $o"
     echo -e "yes - $g y $o"
-    echo -e "no - $g n $o"
+    echo -e "no  - $r n $o"
     echo -e "$r1 ************* $o"
     read ans
     if [ "$ans" == "y" ] || [ "$ans" == "Y" ]
@@ -854,9 +854,9 @@ if [ -f  "$out_dir/arch/arm64/boot/Image.gz-dtb" ]
     echo -e "$g zipping.. $o"
     echo -e "$r1 ******** $o"
     zip -r9 $krnl_name-$tc-$device_name-$krnl_rev-$built_time *
-    echo -e "$r1 ********************************************* $o"
-    echo -e "$g $krnl_name - $krnl_rev is ready to be flashed. $o"
-    echo -e "$r1 ********************************************* $o"
+    echo -e "$r1 ********************************************************************** $o"
+    echo -e "$g $krnl_name - $krnl_rev is ready in $zip_dir $o"
+    echo -e "$r1 ********************************************************************** $o"
 else
     echo -e "$r Check what has gone wrong and try again $o"
 fi
