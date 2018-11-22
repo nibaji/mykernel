@@ -46,16 +46,16 @@ if [ ! -d "$zip_dir" ]
 fi
 
 #get kernel_name
-echo -e "$r1 ************************************************************** $o"
+echo -e "$r1 ***************************************************************** $o"
 echo -e "$r Give your kernel a name $o$g Leave blank if you wanna use the default $o"
-echo -e "$r1 ************************************************************** $o"
+echo -e "$r1 ***************************************************************** $o"
 read krnl_name
 [ -z $krnl_name ] && krnl_name="mykernel"
 
 #get kernel_name
-echo -e "$r1 ****************************************************************** $o"
+echo -e "$r1 ********************************************************************* $o"
 echo -e "$r Give your kernel, a version $o$g Leave blank if you wanna use the default $o"
-echo -e "$r1 ****************************************************************** $o"
+echo -e "$r1 ********************************************************************* $o"
 read krnl_rev
 
 #get device_name
@@ -172,14 +172,14 @@ read bldhost
 echo -e "$r1 ********************************** $o"
 echo -e "$r Choose a toolchain to cross compile $o"
 echo -e "$r1 ********************************** $o"
-echo -e "1 $b AOSP-GCC $o $r (4.9) $o"
-echo -e "2 $b ARM-GNU-GCC $o $r (8.2) $o"
-echo -e "3 $b Bootlin $o $r (Stable - gcc 6.4.0 & Bleeding Edge - gcc 8.2.0) $o"
-echo -e "4 $b Linaro $o $r (7.3.1) $o"
+echo -e "1 $b AOSP-GCC $o$r (4.9) $o"
+echo -e "2 $b ARM-GNU-GCC $o$r (8.2) $o"
+echo -e "3 $b Bootlin $o$r (Stable - gcc 6.4.0 & Bleeding Edge - gcc 8.2.0) $o"
+echo -e "4 $b Linaro $o$r (7.3.1) $o"
 echo -e "5 $r Custom/Unlisted toolchain $b(Have it extracted to a folder)$o $o"
-echo -e "$r1 ****************************************************************** $o"
-echo -e "Specify a number"
-echo -e "$r1 ****************************************************************** $o"
+echo -e "$r1 ******************** $o"
+echo -e "Specify an option number"
+echo -e "$r1 ******************** $o"
 read tc_opt
 
 #cflags
@@ -201,7 +201,7 @@ if [ $tc_opt -eq 1 ] #aosp-gcc
         echo -e "$r1 ********************************* $o"
         echo -e "$r Toolchain has already been cloned? $o"
         echo -e "$r1 ********************************* $o"
-        echo -e "yes -$g y $o"
+        echo -e "yes - $g y $o"
         echo -e "no  - $r n $o"
         echo -e "$r1 ********************************* $o"
         read ans
@@ -728,8 +728,8 @@ if [ "$ans_cc32" == "y" ] || [ "$ans_cc32" == "Y" ]
         echo -e "$r1 *********************************** $o"
         echo -e "$g Copy paste arm32 toolchain directory $o"
         echo -e "$r1 *********************************** $o"
-        echo -e "$g1 Leave blank if aosp arm-linux-androideabi-4.9 toolchain has been cloned/extracted in $toolchains $o"
-        echo -e "$r1 *********************************** $o"
+        echo -e "$g1 Leave blank if $r1 aosp arm-linux-androideabi-4.9 $o toolchain has already been cloned in $r1 $(realpath $toolchains)$o$o"
+        echo -e "$r1 ****************************************************************************************************************************************** $o"
         read toolchain32_dir
         [ -z $toolchain32_dir ] && toolchain32_dir="$toolchain/arm-linux-androideabi-4.9"
         cd "$toolchain32_dir"/bin
