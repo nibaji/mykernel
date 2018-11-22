@@ -834,15 +834,15 @@ if [ -f  "$out_dir/arch/arm64/boot/Image.gz-dtb" ]
     cp  $out_dir/arch/arm64/boot/Image.gz-dtb $zip_dir
     mv Image.gz-dtb zImage
     sed -i 's/ExampleKernel by osm0sis @ xda-developers/'$krnl_name'-'$krnl_rev'/g' anykernel.sh
-    if [ "$asrt_ans" != "y" ] || [ "$asrt_ans" != "Y" ]
+    if [ "$asrt_ans" == "y" ] || [ "$asrt_ans" == "Y" ]
         then
+        sed -i 's/maguro/'$device_name'/g' anykernel.sh
+        sed -i 's/toro/'$device_name1'/g' anykernel.sh
+        sed -i 's/plus//g' anykernel.sh        
+    else 
         sed -i 's/do.devicecheck=1/do.devicecheck=0/g' anykernel.sh
         sed -i 's/maguro/'$device_name'/g' anykernel.sh
         sed -i 's/toro//g' anykernel.sh && sed -i 's/plus//g' anykernel.sh
-    else 
-        sed -i 's/maguro/'$device_name'/g' anykernel.sh
-        sed -i 's/toro/'$device_name1'/g' anykernel.sh
-        sed -i 's/plus//g' anykernel.sh
     fi
     sed -i 's/platform\/\omap\/\omap_hsmmc.0/bootdevice/g' anykernel.sh
     sed -i '/# AnyKernel file attributes/{/write_boot/!d;}' anykernel.sh
@@ -857,7 +857,7 @@ if [ -f  "$out_dir/arch/arm64/boot/Image.gz-dtb" ]
     echo -e "$r1 ********************************************************************** $o"
     echo -e "$g $krnl_name - $krnl_rev is ready in $zip_dir $o"
     echo -e "$r1 ********************************************************************** $o"
-    echo -e "$r $g1 Kernel : $zip_dir/$krnl_name-$tc-$device_name-$krnl_rev-$built_time $o $o"
+    echo -e "$r $g1 Kernel : $(realpath $zip_dir/*.zip) $o $o"
     echo -e "$r $g1 Size   : $(du -h *.zip | sed 's/'$krnl_name-$tc-$device_name-$krnl_rev-$built_time'.zip//') $o $o"
     echo -e "$r $g1 md5sum : $(md5sum *.zip | sed 's/'$krnl_name-$tc-$device_name-$krnl_rev-$built_time'.zip//') $o $o"
     echo -e "$g1 ********************************************************************** $o"
