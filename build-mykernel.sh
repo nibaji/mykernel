@@ -45,6 +45,19 @@ if [ ! -d "$zip_dir" ]
     mkdir $zip_dir
 fi
 
+#get kernel_name
+echo -e "$r1 ************************************************************** $o"
+echo -e "$r Give your kernel a name $o$g Leave blank if you wanna use the default $o"
+echo -e "$r1 ************************************************************** $o"
+read krnl_name
+[ -z $krnl_name ] && krnl_name="mykernel"
+
+#get kernel_name
+echo -e "$r1 ****************************************************************** $o"
+echo -e "$r Give your kernel, a version $o$g Leave blank if you wanna use the default $o"
+echo -e "$r1 ****************************************************************** $o"
+read krnl_rev
+
 #get device_name
 echo -e "$r1 ***************************************** $o"
 echo -e "$r Give your device codename $o$g without spaces $o"
@@ -65,19 +78,6 @@ if [ "$asrt_ans" == "y" ] || [ "$asrt_ans" == "Y" ]
     echo -e "$r1 ********************************************************************************************************** $o"
     read $device_name1
 fi
-
-#get kernel_name
-echo -e "$r1 ************************************************************** $o"
-echo -e "$r Give your kernel a name $o$g Leave blank if you wanna use the default $o"
-echo -e "$r1 ************************************************************** $o"
-read krnl_name
-[ -z $krnl_name ] && krnl_name="mykernel"
-
-#get kernel_name
-echo -e "$r1 ****************************************************************** $o"
-echo -e "$r Give your kernel, a version $o$g Leave blank if you wanna use the default $o"
-echo -e "$r1 ****************************************************************** $o"
-read krnl_rev
 
 #get kernel src
 echo -e "$r1 ************************************************************** $o"
