@@ -872,12 +872,13 @@ cd $mykernel_dir
 
 #time
 if [ -f  "$zip_dir/*.zip" ]
-end_time=$(date +'%s')
-runtime_hr=$((("$end_time" - "$start_time")/3600))
-runtime_min=$(((("$end_time" - "$start_time")/60)%60))
-runtime_sec=$((("$end_time" - "$start_time")%60))
-runtime="$r $runtime_hr $o$g1 h $o : $b $runtime_min $o$r1 m $o : $g $runtime_sec $o$b1 s $o"
-echo -e "$r1 ***************************************************************************** $o"
-echo -e "$g1                   mykernel script ran for $o $runtime"
-echo -e "$r1 ***************************************************************************** $o"
+    then
+    end_time=$(date +'%s')
+    runtime_hr=$((("$end_time" - "$start_time")/3600))
+    runtime_min=$(((("$end_time" - "$start_time")/60)%60))
+    runtime_sec=$((("$end_time" - "$start_time")%60))
+    runtime="$r $runtime_hr $o$g1 h $o : $b $runtime_min $o$r1 m $o : $g $runtime_sec $o$b1 s $o"
+    echo -e "$r1 ***************************************************************************** $o"
+    echo -e "$g1                   mykernel script ran for $o $runtime"
+    echo -e "$r1 ***************************************************************************** $o"
 fi
